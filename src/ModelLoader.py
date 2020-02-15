@@ -44,8 +44,6 @@ class Summarizer(nn.Module):
     def forward(self, x, segs, clss, mask, mask_cls, sentence_range=None):
         top_vec = self.bert(x, segs, mask)
         sents_vec = top_vec[torch.arange(top_vec.size(0)).unsqueeze(1), clss]
-        print(sents_vec.shape)
-        print(mask_cls[:, :, None].shape)
         sents_vec = sents_vec * mask_cls[:, :, None].float()
         sent_scores = self.encoder(sents_vec, mask_cls).squeeze(-1)
         return sent_scores, mask_cls
