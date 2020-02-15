@@ -13,11 +13,11 @@ services:
       - type: bind
         source: ../checkpoint
         target: /checkpoint
-        - type: bind
-          source: ../model
-          target: /model
-        - type: bind
-          source: ../data
-          target: /data
+      - type: bind
+        source: ../model
+        target: /model
+      - type: bind
+        source: ../data
+        target: /data
     working_dir: /workdir
-    command: python youyakuman.py
+    command: python youyakuman.py --txt_file /data/test.txt --lang en -n 3 --super_long

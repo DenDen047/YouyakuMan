@@ -3,7 +3,7 @@ import os
 import random
 import torch
 
-from src.models.preprocess import Preprocess
+from models.preprocess import Preprocess
 
 
 def lazy_dataset(data_path, shuffle):

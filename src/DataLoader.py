@@ -1,6 +1,6 @@
 from pytorch_pretrained_bert import BertTokenizer
 
-from src.LangFactory import LangFactory
+from LangFactory import LangFactory
 import pdb
 
 

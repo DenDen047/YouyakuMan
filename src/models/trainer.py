@@ -2,8 +2,8 @@ import os
 
 import torch
 
-from src.models.reporter import ReportMgr
-from src.models.stats import Statistics
+from models.reporter import ReportMgr
+from models.stats import Statistics
 
 
 def build_trainer(args, model, optim):

@@ -3,8 +3,8 @@ from torch import nn
 from pytorch_pretrained_bert import BertModel
 import pdb
 
-from src.models.encoder import TransformerInterEncoder
-from src.LangFactory import LangFactory
+from models.encoder import TransformerInterEncoder
+from LangFactory import LangFactory
 
 
 class Bert(nn.Module):
