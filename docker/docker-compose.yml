@@ -20,4 +20,4 @@ services:
         source: ../data
         target: /data
     working_dir: /workdir
-    command: python youyakuman.py --txt_file /data/test.txt --lang en -n 3 --super_long
+    command: python youyakuman.py --txt_file /data/testjp.txt --lang jp -n 3 --super_long
