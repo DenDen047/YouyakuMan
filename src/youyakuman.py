@@ -41,9 +41,13 @@ if __name__ == '__main__':
 #        sys.stdout.write('\n<Warning: Number of extractions might slightly altered since with --super_long option>\n')
 
     # Language initiator
+    print('Language initializing...')
     lf = LangFactory(args.lang)
     translator = None if args.lang in lf.support_lang else TranslatorY()
 
+    print('Data loading...')
     data = DataLoader(args.txt_file, args.super_long, args.lang, translator).data
+    print('Model loading...')
     model = ModelLoader(lf.toolkit.cp, lf.toolkit.opt, args.lang)
+    print('Summarizing...')
     summarizer = Summarizer(data, model, args.n, translator)

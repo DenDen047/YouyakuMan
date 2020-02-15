@@ -3,6 +3,7 @@ from pyknp import Juman
 from configparser import ConfigParser
 from pytorch_pretrained_bert import BertTokenizer
 import pdb
+from tqdm import tqdm
 
 config = ConfigParser()
 config.read('./config.ini')
@@ -16,7 +17,8 @@ class JumanTokenizer:
         )
 
     def __call__(self, text):
-        result = self.juman.analysis(text)
+        print(text)
+        result = self.juman.analysis(text)  # too slow
         return [mrph.midasi for mrph in result.mrph_list()]
 
 
@@ -89,10 +91,15 @@ class JapaneseWorker:
         def _preprocess_text(text):
             return text.replace(" ", "")  # for Juman
 
-        for sentence in src:
+        print(f'run tokenizer...: {len(src)}')
+        for sentence in tqdm(src):
+            print('_preprocess_text')
             preprocessed_text = _preprocess_text(sentence)
+            print('juman_tokenizer')
             juman_tokens = self.juman_tokenizer(preprocessed_text)
+            print('bert_tokenizer.tokenize')
             tokens = self.bert_tokenizer.tokenize(" ".join(juman_tokens))
+            print('convert_tokens_to_ids')
             tokens = ["[CLS]"] + tokens + ["[SEP]"]
             ids = self.bert_tokenizer.convert_tokens_to_ids(tokens)
             token += tokens

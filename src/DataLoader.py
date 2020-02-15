@@ -12,15 +12,18 @@ class DataLoader:
         self.langfac = LangFactory(lang)
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
         self._load_data()
-        # If rawdata isnt modelized, use google translation to translate to English
+        # If rawdata isn't modelized, use google translation to translate to English
         if self.langfac.stat is 'Invalid':
             self.translator = translator
             self._translate()
         # Outsource suitable line splitter
         self.texts = self.langfac.toolkit.linesplit(self.rawtexts)
         # Outsource suitable tokenizer
+        print('tokenizer')
         self.token, self.token_id = self.langfac.toolkit.tokenizer(self.texts)
+        print('_generate_results')
         self._generate_results()
+        print('ok')
 
     def _generate_results(self):
 
