@@ -26,6 +26,9 @@ RUN cmake .. \
 RUN make
 RUN make install
 
+# for Japanese
 RUN apt-get install -y locales \
-    && locale-gen ja_JP.UTF-8 \
-    && echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
+    && locale-gen ja_JP.UTF-8
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:ja
+ENV LC_ALL ja_JP.UTF-8

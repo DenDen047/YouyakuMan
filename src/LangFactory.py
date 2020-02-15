@@ -11,13 +11,13 @@ config.read('./config.ini')
 
 class JumanTokenizer:
     def __init__(self):
-        self.juman = Juman(
-            command=config['Juman']['command'],
-            option=config['Juman']['option']
-        )
+        # self.juman = Juman(
+        #     command=config['Juman']['command'],
+        #     option=config['Juman']['option']
+        # )
+        self.juman = Juman()
 
     def __call__(self, text):
-        print(text)
         result = self.juman.analysis(text)  # too slow
         return [mrph.midasi for mrph in result.mrph_list()]
 
