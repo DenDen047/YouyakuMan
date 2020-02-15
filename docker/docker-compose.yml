@@ -5,19 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: instagrambot:latest
+    image: denden047/youyakuman:latest
     volumes:
       - type: bind
         source: ../src
         target: /workdir
       - type: bind
-        source: ../log
-        target: /log
+        source: ../checkpoint
+        target: /checkpoint
       - type: bind
-        source: ../data
-        target: /data
-      - type: bind
-        source: ../configs
-        target: /configs
+        source: ../model
+        target: /model
     working_dir: /workdir
-    command: python main.py
+    command: python youyakuman.py

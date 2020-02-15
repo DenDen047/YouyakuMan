@@ -2,11 +2,11 @@ import os
 import argparse
 from argparse import RawTextHelpFormatter
 
-from src.DataLoader import DataLoader
-from src.ModelLoader import ModelLoader
-from src.Summarizer import Summarizer
-from src.Translator import TranslatorY
-from src.LangFactory import LangFactory
+from DataLoader import DataLoader
+from ModelLoader import ModelLoader
+from Summarizer import Summarizer
+from Translator import TranslatorY
+from LangFactory import LangFactory
 
 import sys
 

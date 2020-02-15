@@ -1,4 +1,2 @@
-numpy
-pillow
-opencv-python
-instabot
+pytorch_pretrained_bert
+googletrans
