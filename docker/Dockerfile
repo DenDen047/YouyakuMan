@@ -18,10 +18,10 @@ WORKDIR /tmp
 RUN wget https://github.com/ku-nlp/jumanpp/releases/download/v${JUMANPP_VERSION}/jumanpp-${JUMANPP_VERSION}.tar.xz
 RUN tar xf jumanpp-${JUMANPP_VERSION}.tar.xz
 WORKDIR /tmp/jumanpp-${JUMANPP_VERSION}
-RUN mkdir bld
-WORKDIR ./bld
+RUN mkdir build
+WORKDIR ./build
 RUN cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/opt
+    -DCMAKE_INSTALL_PREFIX=/usr/local
 RUN make
-RUN make install -j8
+RUN make install
