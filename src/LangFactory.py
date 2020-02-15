@@ -3,7 +3,6 @@ from pyknp import Juman
 from configparser import ConfigParser
 from pytorch_pretrained_bert import BertTokenizer
 import pdb
-from tqdm import tqdm
 
 config = ConfigParser()
 config.read('./config.ini')
@@ -48,7 +47,7 @@ class JapaneseWorker:
                                             do_basic_tokenize=False)
         self.cls_id = self.bert_tokenizer.vocab['[CLS]']
         self.mask_id = self.bert_tokenizer.vocab['[MASK]']
-        self.bert_model = 'PATH_TO_BERTJPN'
+        self.bert_model = '/model/Japanese/bert/Japanese_L-12_H-768_A-12_E-30_BPE'
 
         self.cp = '/checkpoint/jp/cp_step_710000.pt'
         self.opt = '/checkpoint/jp/opt_step_710000.pt'
@@ -91,15 +90,10 @@ class JapaneseWorker:
         def _preprocess_text(text):
             return text.replace(" ", "")  # for Juman
 
-        print(f'run tokenizer...: {len(src)}')
-        for sentence in tqdm(src):
-            print('_preprocess_text')
+        for sentence in src:
             preprocessed_text = _preprocess_text(sentence)
-            print('juman_tokenizer')
             juman_tokens = self.juman_tokenizer(preprocessed_text)
-            print('bert_tokenizer.tokenize')
             tokens = self.bert_tokenizer.tokenize(" ".join(juman_tokens))
-            print('convert_tokens_to_ids')
             tokens = ["[CLS]"] + tokens + ["[SEP]"]
             ids = self.bert_tokenizer.convert_tokens_to_ids(tokens)
             token += tokens

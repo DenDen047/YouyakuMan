@@ -19,11 +19,8 @@ class DataLoader:
         # Outsource suitable line splitter
         self.texts = self.langfac.toolkit.linesplit(self.rawtexts)
         # Outsource suitable tokenizer
-        print('tokenizer')
         self.token, self.token_id = self.langfac.toolkit.tokenizer(self.texts)
-        print('_generate_results')
         self._generate_results()
-        print('ok')
 
     def _generate_results(self):
 
