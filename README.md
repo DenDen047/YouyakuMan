@@ -1,6 +1,6 @@
-# YouyakuMan 
+# YouyakuMan
 
- [![Unstable](https://poser.pugx.org/ali-irawan/xtra/v/unstable.svg)](*https://poser.pugx.org/ali-irawan/xtra/v/unstable.svg*)  [![License](https://poser.pugx.org/ali-irawan/xtra/license.svg)](*https://poser.pugx.org/ali-irawan/xtra/license.svg*) 
+ [![Unstable](https://poser.pugx.org/ali-irawan/xtra/v/unstable.svg)](*https://poser.pugx.org/ali-irawan/xtra/v/unstable.svg*)  [![License](https://poser.pugx.org/ali-irawan/xtra/license.svg)](*https://poser.pugx.org/ali-irawan/xtra/license.svg*)
 
 ### Introduction
 
@@ -18,14 +18,16 @@ using BertSum as summatization model, extract top N important sentences.
 
 ```
 pip install torch
-pip install pytorch_pretrained_bert
+pip install transformers
 pip install googletrans
 ```
 
 #### Japanese specific requirement
 
 - [BERT日本語Pretrainedモデル — KUROHASHI-KAWAHARA LAB](http://nlp.ist.i.kyoto-u.ac.jp/index.php?BERT日本語Pretrainedモデル)
-- [Juman++ V2の開発版](https://github.com/ku-nlp/jumanpp)[ — KUROHASHI-KAWAHARA LAB](http://nlp.ist.i.kyoto-u.ac.jp/index.php?BERT日本語Pretrainedモデル)
+    1. Download `Japanese_L-12_H-768_A-12_E-30_BPE.zip` or `Japanese_L-12_H-768_A-12_E-30_BPE_WWM.zip`
+    2. Put the unzipped folder into /model/Japanese
+    3. Adjust `src/config.ini` and `JapaneseWorker.bert_model` parameter
 
 ---
 
@@ -39,10 +41,16 @@ Download and put under directory `checkpoint/en` or `checkpoint/jp`
 
 ---
 
+### Usage
+
+```sh
+$ ./run.sh
+```
+
 ### Example
 
 ```
-$python youyakuman.py -txt_file YOUR_FILE -lang LANG -n 3 --super_long 
+$ python youyakuman.py -txt_file YOUR_FILE -lang LANG -n 3 --super_long
 ```
 
 #### Note

@@ -1,6 +1,6 @@
 from pytorch_pretrained_bert import BertTokenizer
 
-from src.LangFactory import LangFactory
+from LangFactory import LangFactory
 import pdb
 
 
@@ -12,7 +12,7 @@ class DataLoader:
         self.langfac = LangFactory(lang)
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
         self._load_data()
-        # If rawdata isnt modelized, use google translation to translate to English
+        # If rawdata isn't modelized, use google translation to translate to English
         if self.langfac.stat is 'Invalid':
             self.translator = translator
             self._translate()

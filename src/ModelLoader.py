@@ -1,10 +1,11 @@
+import os
 import torch
 from torch import nn
 from pytorch_pretrained_bert import BertModel
 import pdb
 
-from src.models.encoder import TransformerInterEncoder
-from src.LangFactory import LangFactory
+from models.encoder import TransformerInterEncoder
+from LangFactory import LangFactory
 
 
 class Bert(nn.Module):
@@ -13,7 +14,8 @@ class Bert(nn.Module):
         self.model = BertModel.from_pretrained(bert_model, cache_dir=temp_dir)
 
     def forward(self, x, segs, mask):
-        encoded_layers, _ = self.model(x, segs, attention_mask=mask)
+        encoded_layers, _ = self.model(x, segs)
+        # encoded_layers, _ = self.model(x, segs, attention_mask=mask)
         top_vec = encoded_layers[-1]
         return top_vec
 
@@ -22,7 +24,14 @@ class Summarizer(nn.Module):
     def __init__(self, opt, lang):
         super(Summarizer, self).__init__()
         self.langfac = LangFactory(lang)
-        self.bert = Bert(self.langfac.toolkit.bert_model, './model/English')
+        if lang == 'jp':
+            dirname = 'Japanese'
+        elif lang == 'en':
+            dirname = 'English'
+        else:
+            dirname = 'Others'
+        temp_dir = os.path.join('/model', dirname)
+        self.bert = Bert(self.langfac.toolkit.bert_model, temp_dir=temp_dir)
         self.encoder = TransformerInterEncoder(self.bert.model.config.hidden_size,
                                                opt['ff_size'],
                                                opt['heads'],

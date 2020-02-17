@@ -4,9 +4,9 @@ import os
 
 import argparse
 
-from src.models.train_dataloader import DataLoader
-from src.models.model_builder import Summarizer, build_optim
-from src.models.trainer import build_trainer
+from models.train_dataloader import DataLoader
+from models.model_builder import Summarizer, build_optim
+from models.trainer import build_trainer
 
 os.chdir('./')
 
